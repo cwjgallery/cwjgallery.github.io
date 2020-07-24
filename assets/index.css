@@ -1,0 +1,32 @@
+body {
+    padding: 100px;
+}
+
+.thumb-wrap {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.thumb-wrap .thumb {
+    width: 20%;
+    margin: 20px;
+}
+.thumb-wrap .thumb .thumbimg {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.detail-wrap {
+    background-color: #333;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.detail-wrap .detail {
+    width: 400px;
+    margin: 5% 20%;
+}
