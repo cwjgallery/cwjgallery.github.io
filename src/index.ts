@@ -21,3 +21,5 @@ galleryLoader
     .catch(() => {
         console.log('图片加载失败');
     })
+
+window.addEventListener('resize', () => renderthumb(list, galleryLoader));

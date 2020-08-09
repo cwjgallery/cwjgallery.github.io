@@ -2,7 +2,7 @@ import {galleryItem} from './types';
 
 export default class ImgLoader {
     src: galleryItem[];
-    cache: Map<string, HTMLImageElement>;
+    cache: Map<string, string>;
 
     constructor(src: galleryItem[]) {
         this.setsrc(src);
@@ -15,7 +15,15 @@ export default class ImgLoader {
             let img = new Image();
             img.src = 'gallery/' + src;
             img.onload = (...args) => {
-                this.setImg(src, img);
+                const canvas = document.createElement("canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                const ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+                const dataURL = canvas.toDataURL("image/" + ext);
+                this.setImg(src, dataURL);
                 resolve();
             };
             img.onerror = reject;
@@ -23,15 +31,26 @@ export default class ImgLoader {
     }
 
     private readImg (src: string): HTMLImageElement | null {
-        return this.cache.has(src) ? this.cache.get(src) : null;
+        if (this.cache.has(src)) {
+            const img = new Image();
+            img.src = this.cache.get(src);
+            return img;
+        } else {
+            return null;
+        }
     }
 
-    private setImg (src: string, img: HTMLImageElement): void {
+    private setImg (src: string, img: string): void {
         !this.cache.has(src) && this.cache.set(src, img);
     }
 
     setsrc (src: galleryItem[]) {
-        this.src = src;
+        this.src = src.map(i => {
+            if (!i.thumb) {
+                i.thumb = i.url;
+            }
+            return i;
+        });
     }
     
     loadThumb () {

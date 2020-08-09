@@ -4,5 +4,7 @@ export interface galleryItem {
     tags: string[],
     desc: string,
     url: string,
-    thumb: string,
+    thumb?: string,
 }
+
+export type htmlchild = HTMLElement | string

@@ -1,21 +1,58 @@
+html, body {margin: 0; padding: 0; height: 100%;}
 body {
-    padding: 100px;
+    padding: 30px;
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
 }
+
+
+.header {
+    padding: 30px;
+}
+.header .title {
+    font-size: 40px;
+    font-weight: bolder;
+}
+
 
 .thumb-wrap {
     flex-wrap: wrap;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
-.thumb-wrap .thumb {
-    width: 20%;
-    margin: 20px;
+.thumb-wrap .waterfall {
+    width: 300px;
 }
-.thumb-wrap .thumb .thumbimg {
+.thumb-wrap .waterfall .thumb {
+    width: 255px;
+    margin: 0 0 -20px 0;
+    border-radius: 15px;
+    border: 1px solid #999;
+    box-shadow: 10px -10px 5px rgba(0, 0, 0, .2);
+    position: relative;
+    background: #fff;
+}
+.thumb-wrap .waterfall .thumb:hover {
+    z-index: 1;
+    transform: scale(1.1) !important;
+    transition: .2s;
+}
+.thumb-wrap .waterfall .thumb .thumbimg {
     width: 100%;
     border-radius: 15px;
 }
+.thumb-wrap .waterfall .thumb .desc {
+    padding: 0 10px;
+    text-align: right;
+}
+.thumb-wrap .waterfall .thumb .date {
+    padding: 0 10px;
+    color: #999;
+    text-align: right;
+}
+
 
 .detail-wrap {
     background-color: #333;
@@ -24,9 +61,5 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-}
-
-.detail-wrap .detail {
-    width: 400px;
-    margin: 5% 20%;
+    z-index: 2;
 }
